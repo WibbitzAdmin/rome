@@ -268,7 +268,8 @@ public class RSS091UserlandGenerator extends RSS090Generator {
 
         final Description description = item.getDescription();
         if (description != null) {
-            eItem.addContent(generateSimpleElement("description", description.getValue()));
+            //eItem.addContent(generateSimpleElement("description", description.getValue()));
+        	eItem.addContent(generateSimpleCDATAElement("description", description.getValue()));
         }
 
         final Namespace contentNamespace = getContentNamespace();

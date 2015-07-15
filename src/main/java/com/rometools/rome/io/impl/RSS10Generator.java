@@ -94,7 +94,8 @@ public class RSS10Generator extends RSS090Generator {
 
         final Description description = item.getDescription();
         if (description != null) {
-            eItem.addContent(generateSimpleElement("description", description.getValue()));
+            //eItem.addContent(generateSimpleElement("description", description.getValue()));
+        	eItem.addContent(generateSimpleCDATAElement("description", description.getValue()));
         }
 
         if (item.getModule(getContentNamespace().getURI()) == null && item.getContent() != null) {
