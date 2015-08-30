@@ -46,7 +46,7 @@ public class RSS090Generator extends BaseWireFeedGenerator {
     private static final Namespace RSS_NS = Namespace.getNamespace(RSS_URI);
     private static final Namespace CONTENT_NS = Namespace.getNamespace("content", CONTENT_URI);
     
-    public static boolean encodeRssInCDATA;
+    private boolean encodeRssInCDATA = false;
 
     public RSS090Generator() {
         this("rss_0.9");
@@ -60,8 +60,17 @@ public class RSS090Generator extends BaseWireFeedGenerator {
     public Document generate(final WireFeed feed) throws FeedException {
         final Channel channel = (Channel) feed;
         final Element root = createRootElement(channel);
+        if(feed.getEncodeTitleAndDescInCData()){
+        	encodeRssInCDATA = true;
+        }
+        else{
+        	encodeRssInCDATA = false;
+        }
         populateFeed(channel, root);
         purgeUnusedNamespaceDeclarations(root);
+        for(Namespace additionalNameSpace:feed.getAdditionalNameSpaces()){
+        	root.addNamespaceDeclaration(additionalNameSpace);
+        }
         return createDocument(root);
     }
 
@@ -244,7 +253,7 @@ public class RSS090Generator extends BaseWireFeedGenerator {
         return element;
     }
     protected Element generateSimpleCDATAElement(final String name, final String value) {
-    	if(encodeRssInCDATA){
+    	if(encodeRssInCDATA){    	
     		final Element element = new Element(name, getFeedNamespace());
             CDATA cdata = new CDATA(value);
             element.addContent(cdata);
