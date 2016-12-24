@@ -3,7 +3,14 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-  
+  <!-- <repositories>
+		
+		<repository>
+			<id>centi</id>
+			<url>http://repo1.maven.org/maven2/</url>
+		</repository> 
+
+	</repositories> -->
    
 	<parent>
 		<groupId>com.rometools</groupId>
@@ -19,7 +26,7 @@
 	
 	<build>
 	  <plugins>
-	   <plugin>
+	  <!--  <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
           <execution>
@@ -34,7 +41,7 @@
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
         </configuration>
-      </plugin>
+      </plugin> -->
 	    <plugin>
 		<groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-source-plugin</artifactId>
